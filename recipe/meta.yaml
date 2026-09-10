@@ -1,16 +1,22 @@
 {% set name = "libcublas" %}
-{% set version = "13.6.0.2" %}
-{% set cuda_version = "13.3" %}
+{% set version = "13.7.0.27" %}
+{% set cuda_version = "13.4" %}
 {% set platform = "linux-x86_64" %}  # [linux64]
 {% set platform = "linux-ppc64le" %}  # [ppc64le]
 {% set platform = "linux-sbsa" %}  # [aarch64]
-{% set platform = "windows-x86_64" %}  # [win]
+{% set platform = "windows-x86_64" %}  # [win64]
+{% set platform = "windows-arm64" %}  # [win and arm64]
 {% set target_name = "x86_64-linux" %}  # [linux64]
 {% set target_name = "ppc64le-linux" %}  # [ppc64le]
 {% set target_name = "sbsa-linux" %}  # [aarch64]
-{% set target_name = "x64" %}  # [win]
+{% set target_name = "x64" %}  # [win64]
+{% set target_name = "arm64" %}  # [win and arm64]
 {% set extension = "tar.xz" %}  # [not win]
 {% set extension = "zip" %}  # [win]
+{% set sha256 = "cc38b57206f5fbfe1f7f510bffde3059c525c0119ff3af8e40a6f90f147c01c3" %}  # [linux64]
+{% set sha256 = "30cc7ed94280b0a3e1e4baf0a3ceb9115fd694b39ccdd73dd1a9f0f82aebf4bc" %}  # [aarch64]
+{% set sha256 = "fff93984ee8a85dd8568e4b9000f9e3ef7153f0f73b176756bcbad3c6622d1f0" %}  # [win64]
+{% set sha256 = "932794dcd1e67e152ab2aeaf32ee8141ded807c6ea6d8f85692c40b02fdd09d7" %}  # [win and arm64]
 
 package:
   name: {{ name }}-split
@@ -18,9 +24,7 @@ package:
 
 source:
   url: https://developer.download.nvidia.com/compute/cuda/redist/{{ name }}/{{ platform }}/{{ name }}-{{ platform }}-{{ version }}-archive.{{ extension }}
-  sha256: 1794edb653adf48f5fa02d86bb738ed75888dd355aa39dadb6202d84d554c0dc  # [linux64]
-  sha256: f4ebaa0a184cd7518300bdf275ecd440b82d70fa6b6cfe8ecb8f00218ab19ca8  # [aarch64]
-  sha256: 62e9fa30560c8f0a28e0cdcf9d6fc1fed347bcfab8847239b9ae1fdc1d86408a  # [win]
+  sha256: {{ sha256 }}
 
 build:
   number: 0
